@@ -74,6 +74,23 @@ button {
     100% { transform: translateY(-10vh); opacity: 0;}
 }
 
+/* 🎮 HELLO KITTY GAME STYLES */
+#gameArea {
+    position: relative;
+    height: 300px;
+    border: 3px dashed #ff99cc;
+    border-radius: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: #fff0f6;
+}
+
+#kittyGame {
+    position: absolute;
+    width: 80px;
+    cursor: pointer;
+}
+
 footer {
     margin: 50px;
     font-size: 14px;
@@ -102,7 +119,7 @@ setInterval(() => {
 <h2>💌 Open When...</h2>
 
 <div class="envelope" onclick="toggle('miss')">
-💖 Open when you miss me
+💖 Open when u miss me
 <div id="miss" class="hidden">
 Janvi… even if we are miles apart, my heart is permanently rented by u.  
 No refund. No cancellation. Only love. Forever.
@@ -110,7 +127,7 @@ No refund. No cancellation. Only love. Forever.
 </div>
 
 <div class="envelope" onclick="toggle('sad')">
-💖 Open when u're sad
+💖 Open when you're sad
 <div id="sad" class="hidden">
 Excuse me??? Who allowed sadness near MISS MINE?  
 U are the softest, cutest, most dramatic queen and I will personally fight the universe for u.
@@ -126,6 +143,21 @@ I would still choose u.
 Dramatically. Intensely. Obsessively. 💕
 </div>
 </div>
+</div>
+
+<!-- 🎮 HELLO KITTY GAME SECTION -->
+<div class="section">
+<h2>🎮 Catch Hello Kitty 🎀</h2>
+<p>Catch Hello Kitty 5 times to unlock a surprise 💕</p>
+
+<div id="gameArea">
+<img id="kittyGame"
+src="https://upload.wikimedia.org/wikipedia/en/0/05/Hello_Kitty_character_portrait.png"
+onclick="catchKitty()">
+</div>
+
+<h3>Score: <span id="score">0</span></h3>
+<h3 id="surprise"></h3>
 </div>
 
 <div class="section">
@@ -166,7 +198,7 @@ Will u be mine? 💍
 </div>
 
 <footer>
-Made with dangerous levels of love for u 💕
+Made with dangerous levels of love for Janvi 💕
 </footer>
 
 <script>
@@ -177,7 +209,7 @@ function toggle(id) {
 
 function yesLove() {
     document.getElementById("answer").innerHTML =
-    "SHE SAID YES!!! 💖🎀💖🎀 I LOVE U JANVI!!!";
+    "SHE SAID YES!!! 💖🎀💖🎀 I LOVE YOU JANVI!!!";
 }
 
 function moveNo() {
@@ -191,6 +223,32 @@ function correct() {
     document.getElementById("quizResult").innerHTML =
     "Correct answer! You are officially my Valentine forever 💕";
 }
+
+/* 🎮 HELLO KITTY GAME SCRIPT */
+let score = 0;
+
+function moveKitty() {
+    const kitty = document.getElementById("kittyGame");
+    const area = document.getElementById("gameArea");
+    const maxX = area.clientWidth - 80;
+    const maxY = area.clientHeight - 80;
+
+    kitty.style.left = Math.random() * maxX + "px";
+    kitty.style.top = Math.random() * maxY + "px";
+}
+
+function catchKitty() {
+    score++;
+    document.getElementById("score").innerText = score;
+    moveKitty();
+
+    if (score === 5) {
+        document.getElementById("surprise").innerText =
+        "SURPRISE 💖 You unlocked unlimited kisses and lifetime Valentine status!";
+    }
+}
+
+setInterval(moveKitty, 1000);
 </script>
 
 </body>
